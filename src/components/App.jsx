@@ -1,78 +1,32 @@
 import Search from './Search.js';
-import VideoList from './VideoList.js';
+import searchYouTube from '../lib/searchYouTube.js';
 import VideoPlayer from './VideoPlayer.js';
+import VideoList from './VideoList.js';
 import exampleVideoData from '../data/exampleVideoData.js';
-
-// var App = () => (
-//   <div>
-//     <nav className="navbar">
-//       <div className="col-md-6 offset-md-3">
-//         {/* <div><h5><em>search</em> view goes here</h5></div> */}
-//         <Search />
-//       </div>
-//     </nav>
-//     <div className="row">
-//       <div className="col-md-7">
-//         {/* <div><h5><em>videoPlayer</em> view goes here</h5></div> */}
-//         <VideoPlayer />
-//       </div>
-//       <div className="col-md-5">
-//         {/* <div><h5><em>videoList</em> view goes here</h5></div> */}
-//         <VideoList />
-//       </div>
-//     </div>
-//   </div>
-// );
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      newVideo: {
-        kind: 'youtube#searchResult',
-        etag: 'abQHWywil_AkNqdqji7_FqiK-u4/Ykxo_CqKu8F8kcm-iNgL332gQTY',
-        id: {
-          kind: 'youtube#video',
-          videoId: '4ZAEBxGipoA'
-        },
-        snippet: {
-          publishedAt: '2015-08-02T20:52:58.000Z',
-          channelId: 'UCJbPGzawDH1njbqV-D5HqKw',
-          title: 'React JS Tutorial for Beginners - 1 - Introduction',
-          description: 'My website - https://www.thenewboston.com/videos.php Have questions about the tutorial or React? Ask them here ...',
-          thumbnails: {
-            default: {
-              url: 'https://i.ytimg.com/vi/4ZAEBxGipoA/default.jpg',
-              width: 120,
-              height: 90
-            },
-            medium: {
-              url: 'https://i.ytimg.com/vi/4ZAEBxGipoA/mqdefault.jpg',
-              width: 320,
-              height: 180
-            },
-            high: {
-              url: 'https://i.ytimg.com/vi/4ZAEBxGipoA/hqdefault.jpg',
-              width: 480,
-              height: 360
-            }
-          },
-          channelTitle: 'thenewboston',
-          liveBroadcastContent: 'none'
-        }
-      },
-      videos: exampleVideoData
+      currentVideo: exampleVideoData[0],
+      videos: exampleVideoData,
+      query: 'cats'
     };
+
+    this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleClick (key) {
-    this.setState(state => {
-      state.newVideo = key;
-    });
+    this.setState({currentVideo: key});
   }
 
-  handleSubmit() {
-    
+  handleChange () {
+  }
+
+  componentDidMount () {
+    // const option = {this.state.query};
+    // searchYouTube(option, _____)
   }
 
   render() {
@@ -80,18 +34,21 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <Search />
+            <Search 
+              handleChange={this.handleChange}
+            />
           </div>
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <VideoPlayer video={this.state.newVideo}/>
+            <VideoPlayer 
+              video={this.state.currentVideo}
+            />
           </div>
           <div className="col-md-5">
             <VideoList 
-              videos={exampleVideoData}
-              // newVideo={this.newVideo}
-              handleClick={this.handleClick.bind(this)}
+              videos={this.state.videos}
+              handleClick={this.handleClick}
             />
           </div>
         </div>

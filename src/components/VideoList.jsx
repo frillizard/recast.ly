@@ -1,28 +1,12 @@
 import VideoListEntry from './VideoListEntry.js';
-import exampleVideoData from '../data/exampleVideoData.js';
-
-// var VideoList = () => (
-//   <div className="video-list">
-//     <div><h5><em>videoListEntry</em> view goes here</h5></div>
-//     <div><h5><em>videoListEntry</em> view goes here</h5></div>
-//     <div><h5><em>videoListEntry</em> view goes here</h5></div>
-//     <div><h5><em>videoListEntry</em> view goes here</h5></div>
-//     <div><h5><em>videoListEntry</em> view goes here</h5></div>
-//   </div>
-// );
-
-// class VideoListEntry extends React.Component {
-//   constructor(props) {
-//     super(props);
-//   }
-// }
 
 var VideoList = ({videos, handleClick}) => (
   <div className="video-list">
     {videos.map(video =>
       <VideoListEntry
         video={video}
-        handleClick={handleClick} />
+        handleClick={handleClick} 
+        key={video.id.videoId} />
     )}
   </div>
 );
