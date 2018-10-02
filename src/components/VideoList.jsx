@@ -1,4 +1,4 @@
-import videoListEntry from './VideoListEntry.js';
+import VideoListEntry from './VideoListEntry.js';
 import exampleVideoData from '../data/exampleVideoData.js';
 
 // var VideoList = () => (
@@ -13,7 +13,11 @@ import exampleVideoData from '../data/exampleVideoData.js';
 
 var VideoList = () => (
   <div className="video-list">
-    <videoListEntry />
+    <VideoListEntry videoData={exampleVideoData[0]}/>
+    <VideoListEntry videoData={exampleVideoData[1]}/>
+    <VideoListEntry videoData={exampleVideoData[2]}/>
+    <VideoListEntry videoData={exampleVideoData[3]}/>
+    <VideoListEntry videoData={exampleVideoData[4]}/>
   </div>
 );
 
