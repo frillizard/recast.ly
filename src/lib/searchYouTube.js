@@ -1,17 +1,18 @@
 import YOUTUBE_API_KEY from '../config/youtube.js';
 
-var searchYouTube = (options, callback) => {
+var searchYouTube = ({query, max = 5}, callback) => {
   $.ajax({
     url: 'https://www.googleapis.com/youtube/v3/search',
     data: {
       part: 'snippet',
-      q: options.query,
-      maxResults: options.max,
+      q: query,
+      maxResults: max,
+      type: 'video',
       key: YOUTUBE_API_KEY,
     },
     type: 'GET',
     success: function(data) {
-      callback(data);
+      callback(data.items);
     },
   });
 };

@@ -8,25 +8,31 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentVideo: exampleVideoData[0],
       videos: exampleVideoData,
-      query: 'cats'
+      currentVideo: exampleVideoData[0]
+      // videos: [],
+      // currentVideo: null
     };
 
     this.handleClick = this.handleClick.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.setVideos = this.setVideos.bind(this);
   }
 
   handleClick (key) {
     this.setState({currentVideo: key});
   }
 
-  handleChange () {
+  setVideos(query) {
+    searchYouTube({query}, (videoList) => {
+      this.setState({
+        videos: videoList,
+        currentVideo: videoList[0]
+      });
+    });
   }
 
   componentDidMount () {
-    // const option = {this.state.query};
-    // searchYouTube(option, _____)
+    this.setVideos('cats');
   }
 
   render() {
@@ -35,7 +41,7 @@ class App extends React.Component {
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
             <Search 
-              handleChange={this.handleChange}
+              handleChange={this.setVideos}
             />
           </div>
         </nav>
