@@ -11,10 +11,11 @@ var searchYouTube = ({query, max = 5}, callback) => {
       key: YOUTUBE_API_KEY,
     },
     type: 'GET',
-    success: function(data) {
-      callback(data.items);
-    },
-  });
+    timeout: 3000
+  }).done(data => {
+    callback(data.items);
+  })
+  ;
 };
 
 export default searchYouTube;
